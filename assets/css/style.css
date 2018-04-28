@@ -1,0 +1,25 @@
+body, html {
+    height: 100vh;
+    margin:0;
+}
+
+body{
+    background-image: url('../images/deathstar.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+#gameTitle{
+    font-family: STARWARS;
+	color: white;
+	text-align:center;
+	font-size: 85px;
+	text-shadow: 7px 7px 7px black;    
+}
+
+.character{
+    display:inline-block;
+    border:2px solid green;
+}
