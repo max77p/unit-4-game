@@ -20,41 +20,61 @@
         <h1 id="gameTitle">Star Wars RPG</h1>
     </div>
 
-    <div class="container characterSection">
+    <div class="container playArea">
         <div class="selectCharacter">
-            <h2 id="selectTitle">Select Your Character</h2>
+            <h2 class="headdingStyle">Select Your Character</h2>
         </div>
         <div class="characterArea">
             <div class="character" data-name="obiwan">
-                <h4 class"characterName">Obi-Wan</h4>
-                <img src="./assets/images/obiwan.jpeg" alt="obiwanImg">
-                <h4 class="characterPower">120</h4>
+                <div class="characterName">Obi-Wan</div>
+                <img src="./assets/images/obiwan.jpeg" class="characterImg" alt="obiwanImg">
+                <div class="characterPower">120</div>
             </div>
             <div class="character" data-name="luke">
-                    <h4 class"characterName">Luke Skywalker</h4>
-                    <img src="./assets/images/luke.jpeg" alt="lukeImg">
-                    <h4 class="characterPower">100</h4>
+                <div class="characterName">Luke Skywalker</div>
+                <img src="./assets/images/luke.jpeg" class="characterImg" alt="lukeImg">
+                <div class="characterPower">100</div>
             </div>
             <div class="character" data-name="darth">
-                    <h4 class"characterName">Yoda</h4>
-                    <img src="./assets/images/yoda.jpeg" alt="yodaImg">
-                    <h4 class="characterPower">150</h4>
+                <div class="characterName">Yoda</div>
+                <img src="./assets/images/yoda.jpeg" class="characterImg" alt="yodaImg">
+                <div class="characterPower">150</div>
             </div>
             <div class="character" data-name="yoda">
-                    <h4 class"characterName">Darth Vader</h4>
-                    <img src="./assets/images/darthvader.jpeg" alt="darthImg">
-                    <h4 class="characterPower">180</h4>
+                <div class="characterName">Darth Vader</div>
+                <img src="./assets/images/darthvader.jpeg" class="characterImg" alt="darthImg">
+                <div class="characterPower">180</div>
             </div>
 
         </div>
-        <div class="yourcharacter"></div>
-
-        <div>
 
 
 
+        <div class="yourCharacter">
+            <h2 class="headdingStyle">Your Character</h2>
+            <!--put main character selected here-->
+        </div>
 
-            <script src="./assets/javascript/game.js"></script>
+
+        <div class="enemiesAvailable">
+            <h2 class="headdingStyle">Enemies Available To Attack</h2>
+
+            <!--put in enemies avail here-->
+        </div>
+        <div class="fightSection">
+            <h2 class="headdingStyle">Fight Section</h2>
+            <!--place attack button here-->
+        </div>
+
+        <div class="defenderSection">
+            <h2 class="headdingStyle">Defender</h2>
+            <!--place current enemy here-->
+        </div>
+
+    </div>
+    <!--main container-->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="./assets/javascript/game.js"></script>
 </body>
 
 </html>

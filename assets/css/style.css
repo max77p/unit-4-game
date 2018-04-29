@@ -1,6 +1,7 @@
 body, html {
-    height: 100vh;
+    min-height: 100%;
     margin:0;
+    
 }
 
 body{
@@ -18,8 +19,31 @@ body{
 	font-size: 85px;
 	text-shadow: 7px 7px 7px black;    
 }
+.headdingStyle{
+    font-family: STARWARS;
+	color: white;
+}
 
+.character:hover{
+    cursor:pointer;
+}
+.characterName{
+    text-align: center;
+}
+.characterPower{
+    text-align: center;
+}
+.characterImg{
+   width:150px;
+  height:150px;
+    object-fit: fill;
+}
 .character{
     display:inline-block;
     border:2px solid green;
 }
+#enemiesAvail{
+    font-family: STARWARS;
+	color: white;
+}
+
