@@ -27,8 +27,10 @@ body{
 .character:hover{
     cursor:pointer;
 }
-.characterName{
+.characterName,.characterPower{
     text-align: center;
+    font-family:STARWARS;
+    color:#ffff;
 }
 .characterPower{
     text-align: center;
