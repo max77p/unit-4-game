@@ -24,8 +24,12 @@ body{
 	color: white;
 }
 
+.characterArea{
+   max-width:50em;
+}
 .character:hover{
     cursor:pointer;
+    box-shadow:5px 5px 5px 5px black;
 }
 .characterName,.characterPower{
     text-align: center;
@@ -42,10 +46,17 @@ body{
 }
 .character{
     display:inline-block;
-    border:2px solid green;
+    /*border:2px solid green;*/
+    /*background-color:#fff;*/
+    
 }
 #enemiesAvail{
     font-family: STARWARS;
 	color: white;
 }
 
+.resetPower{
+    margin-left: 15px;
+    margin-top:15px;
+
+}

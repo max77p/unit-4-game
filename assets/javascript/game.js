@@ -1,5 +1,11 @@
 
 
+var myAudio = new Audio("./assets/audio/impMarchTheme.mp3");
+myAudio.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
+myAudio.play();
 
 var $playArea = $('.mainGame>.playArea').clone();
 
@@ -13,7 +19,7 @@ function resetGame() {
 }
 
 
-var randomAttack = [Math.floor(Math.random() * 10) + 5];
+var randomAttack = [Math.floor(Math.random() * 10) + 7];//assign random attack value to make the game unpredictable
 var attackPower = randomAttack[0];
 
 
@@ -22,8 +28,8 @@ var mainObj = {
     obiwan: {
         name: 'obiwan',
         attack: attackPower,
-        counter: 17,
-        hp: 120
+        counter: 20,
+        hp: 125
     },
 
 
@@ -32,7 +38,7 @@ var mainObj = {
         name: 'luke',
         attack: attackPower,
         counter: 23,
-        hp: 100
+        hp: 130
     },
 
     //yoda object
@@ -74,8 +80,10 @@ $(".characterArea").on("click", ".character", function () {
     if(userWon){
         return;
     }
-
-
+    if(inBattle){
+        return;
+    }
+   
     var mainCharacter;
     var restOfCharacters;
 
@@ -94,7 +102,7 @@ $(".characterArea").on("click", ".character", function () {
         userHealth = mainObj[property].hp//$('.characterArea>.character>.characterPower').data("health");//store userhealth rating
     }
     }
-
+turnSabreOff=true;
 });
 
 
@@ -155,7 +163,7 @@ $('.fightSection').on("click", ".givePower", function () {//when you click attac
     $('.characterArea>.character>.characterPower').empty().html(userHealth);
 
 
-    if (enemyHealth > 0&& userHealth<=0) {
+    if (enemyHealth > 0 && userHealth<=0) {
         inBattle = true; 
         alert("you have lost!");
         userLost = true;
@@ -167,64 +175,37 @@ $('.fightSection').on("click", ".givePower", function () {//when you click attac
         $('.givePower').hide();
         inBattle=false;
         userWon=true;
+        alert("you have won the battle! pick a new enemy");
     }
+
     
 
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*function fightingLogic(uA, uH, eD, eH) {
-    console.log(uA + "and" + uH);
-    console.log(eD + "and" + eH);
-
-    var currentAttackValue = uA;//set user attack value
-    var counterAttackPower = eD;//set enemy defence value
-
-    eH = eH - currentAttackValue;//bring down enemy health by user attack value
-    uH = uH - counterAttackPower;//bring down user health by enemy defence value
-
-
-    currentAttackValue = currentAttackValue + uA;//increment user attack by base value on every attack
+//styling//
+var turnSabreOff; 
+var audio = new Audio("./assets/audio/lightsabre.mp3");
+$(".character").mouseenter(function() {
+    if(turnSabreOff){
+        return;
+    }
+    audio.play();
+   }).mouseleave(function() {
+       audio.pause();
+       audio.currentTime=0;
+     });
     
 
-    $('.defenderSection>.character>.characterPower').empty().html(eH);
-    $('.characterArea>.character>.characterPower').empty().html(uH);
-
-}*/
 
 
 
 
 
 
-/*var defeated = false;
-var won = false;
-console.log(eH);
-if (eH <= 0) {
-    updateEnemy();
-    console.log("you won!");
-}
-else if (uH <= 0) {
-    defeated = true;
-    console.log("you lost");
-}
-if (defeated) {
-    alert("game over");
-}*/
+
+
+
 
 
 
@@ -245,31 +226,11 @@ if (defeated) {
 
 //TODO-set attack values for each character - done
 
-//TODO-if you lose, restart game
+//TODO-if you lose, restart game - done
 
-//TODO-if you win, remove defender and ask user to select new defender 
-
-
+//TODO-if you win, remove defender and ask user to select new defender -- done
 
 
-
-
-
-
-//first attack equals attack value
-//next attack add base to current value
-//each time player attacks, characters attack power increases by its base power--after each attack add base to the number.
-//i.e 6 is base, then 12, then 18 etc. If they win, then current power + base will be new power
-
-//enemy character only has counter attack power, which stays constant
-
-//all these values must be different for each character
-
-
-
-var healthPoints;
-var attackPower;
-var counterAttackPower;
 
 
 
