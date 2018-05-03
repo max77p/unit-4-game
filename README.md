@@ -1,5 +1,5 @@
 # Welcome to my Star Wars Game!
-![Game Screenshot](/images/forReadme.jpeg)
+![Game Screenshot](./assets/images/forReadme.jpeg)
 
 
 ### Here are the features of the game
