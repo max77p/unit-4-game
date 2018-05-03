@@ -1,52 +1,81 @@
-//console.log("test");
+
+
 
 var $playArea = $('.mainGame>.playArea').clone();
+
 $('.mainGame').on("click", ".resetPower", resetGame);
 
 function resetGame() {
     console.log("reset hit");
+    //$('.playArea').replaceWith($playArea);
+    location.reload();
     $('.mainGame>.resetPower').remove();
-    $('.playArea').replaceWith($playArea);
-    inBattle=false;
-    userLost=false;
-    getThis=null;
-    attackPower=null;
-    currentAttackValue=0;
-    attack=null;
-    defence=null;
-    userHealth=null;
-    enemyHealth=null;
 }
 
 
+var randomAttack = [Math.floor(Math.random() * 10) + 5];
+var attackPower = randomAttack[0];
 
-var getthis = [Math.floor(Math.random() * 10) + 5];
-var attackPower = getthis[0];
-console.log(attackPower);
-var attackRating = {
-    "obiwan": attackPower,
-    "luke": attackPower,
-    "yoda": attackPower,
-    "darth": attackPower
-}
-var defenceRating = {
-    "obiwan": 17,
-    "luke": 23,
-    "yoda": 25,
-    "darth": 15
-}
+
+var mainObj = {
+    //obiwan object
+    obiwan: {
+        name: 'obiwan',
+        attack: attackPower,
+        counter: 17,
+        hp: 120
+    },
+
+
+    //luke object
+    luke: {
+        name: 'luke',
+        attack: attackPower,
+        counter: 23,
+        hp: 100
+    },
+
+    //yoda object
+    yoda: {
+        name: 'yoda',
+        attack: attackPower,
+        counter: 25,
+        hp: 150
+    },
+
+    //darth vader object
+    darth: {
+        name: 'darth',
+        attack: attackPower,
+        counter: 20,
+        hp: 180
+    }
+};
+
+
+//for (property in mainObj) {
+  //  console.log(mainObj[property].attack);
+//}
+
 
 var attack;
 var defence;
 var userHealth;
 var enemyHealth;
 
-var selectUser;//character select on or off
+var selectUser;//character select on or off*/
 
 //keep copy for reset game
 
-$(".characterArea").on("click", ".character", function (el) {
-    console.log(el);
+$(".characterArea").on("click", ".character", function () {
+    if(userLost){
+        return;
+    }
+    if(userWon){
+        return;
+    }
+
+
     var mainCharacter;
     var restOfCharacters;
 
@@ -57,19 +86,18 @@ $(".characterArea").on("click", ".character", function (el) {
 
     $('.selectCharacter').empty().append(($('.yourCharacter')));
 
-    for (var property in attackRating) {
-        if (mainCharacter === property) {
-            $('.characterArea>.character>.characterPower').attr({ "data-attack": attackRating[property] });
-            attack = attackRating[property];//store attack rating
-            console.log(attack);
-            userHealth = $('.characterArea>.character>.characterPower').data("health");//store userhealth rating
-        }
+    for (property in mainObj) {
+    if (mainCharacter === mainObj[property].name) {
+        $('.characterArea>.character>.characterPower').attr({ "data-attack": mainObj[property].attack});
+        attack = mainObj[property].attack;//store attack rating
+        console.log(attack);
+        userHealth = mainObj[property].hp//$('.characterArea>.character>.characterPower').data("health");//store userhealth rating
+    }
     }
 
 });
 
-var inBattle;//click event on or off
-var userLost;//enable if user won
+
 
 $(".enemiesAvailable").on("click", ".character", function () {
     if (inBattle) {//turn off click event until enemy defeated--inBattle is set to true below to do this
@@ -85,10 +113,10 @@ function fighting(el) {//add attack and defence values to characters
     //turn off click enemies event until battle finishes
     $('.defenderSection').append(el);
 
-    for (var property in defenceRating) {
-        if (el.data("name") === property) {
-            $('.defenderSection>.character>.characterPower').attr({ "data-defence": defenceRating[property] });
-            defence = defenceRating[property];
+    for (property in mainObj) {
+        if (el.data("name") === mainObj[property].name) {
+            $('.defenderSection>.character>.characterPower').attr({ "data-defence": mainObj[property].counter });
+            defence = mainObj[property].counter;
             enemyHealth = $('.defenderSection>.character>.characterPower').data("health");
         }
     }
@@ -101,7 +129,9 @@ function fighting(el) {//add attack and defence values to characters
 }
 
 
-
+var inBattle;//click event on or off
+var userLost;//enable if user won
+var userWon;
 var currentAttackValue = 0;
 $('.fightSection').on("click", ".givePower", function () {//when you click attack button
     console.log(attack);
@@ -123,17 +153,22 @@ $('.fightSection').on("click", ".givePower", function () {//when you click attac
 
     $('.defenderSection>.character>.characterPower').empty().html(enemyHealth);
     $('.characterArea>.character>.characterPower').empty().html(userHealth);
-    if (enemyHealth <= 0) {
-        $('.defenderSection>.character').remove();
-        $('.givePower').hide();
-        inBattle = false;
-    }
-    else if (userHealth <= 0) {
+
+
+    if (enemyHealth > 0&& userHealth<=0) {
+        inBattle = true; 
         alert("you have lost!");
         userLost = true;
         var resetButton = $("<button>").attr('type', 'button').addClass("btn btn-danger resetPower").text("Reset Game");
         $(".mainGame").append(resetButton);
     }
+    else if(enemyHealth<=0 && userHealth>0){//if user beat enemy do this
+        $('.defenderSection>.character').remove();
+        $('.givePower').hide();
+        inBattle=false;
+        userWon=true;
+    }
+    
 
 });
 
