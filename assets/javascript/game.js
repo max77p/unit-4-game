@@ -177,6 +177,20 @@ $('.fightSection').on("click", ".givePower", function () {//when you click attac
         userWon=true;
         alert("you have won the battle! pick a new enemy");
     }
+    if (enemyHealth <0 && userHealth<0 && enemyHealth>userHealth) {
+        inBattle = true; 
+        alert("you have lost!");
+        userLost = true;
+        var resetButton = $("<button>").attr('type', 'button').addClass("btn btn-danger resetPower").text("Reset Game");
+        $(".mainGame").append(resetButton);
+    }
+    else if(enemyHealth <0 && userHealth<0 && enemyHealth<userHealth){
+        $('.defenderSection>.character').remove();
+        $('.givePower').hide();
+        inBattle=false;
+        userWon=true;
+        alert("you have won the battle! pick a new enemy");
+    }
 
     
 
