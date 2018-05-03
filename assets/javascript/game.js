@@ -1,12 +1,28 @@
 //console.log("test");
 
-var mainCharacter;
-var restOfCharacters;
+var $playArea = $('.mainGame>.playArea').clone();
+$('.mainGame').on("click", ".resetPower", resetGame);
+
+function resetGame() {
+    console.log("reset hit");
+    $('.mainGame>.resetPower').remove();
+    $('.playArea').replaceWith($playArea);
+    inBattle=false;
+    userLost=false;
+    getThis=null;
+    attackPower=null;
+    currentAttackValue=0;
+    attack=null;
+    defence=null;
+    userHealth=null;
+    enemyHealth=null;
+}
+
+
 
 var getthis = [Math.floor(Math.random() * 10) + 5];
 var attackPower = getthis[0];
 console.log(attackPower);
-
 var attackRating = {
     "obiwan": attackPower,
     "luke": attackPower,
@@ -20,17 +36,19 @@ var defenceRating = {
     "darth": 15
 }
 
-
 var attack;
 var defence;
 var userHealth;
 var enemyHealth;
 
+var selectUser;//character select on or off
 
-var $YourCharacterTitle=$('.selectCharacter').clone();
-var $playArea=$('.playArea').clone();
+//keep copy for reset game
 
-$(".characterArea").one("click", ".character", function () {
+$(".characterArea").on("click", ".character", function (el) {
+    console.log(el);
+    var mainCharacter;
+    var restOfCharacters;
 
     mainCharacter = $(this).data("name"); console.log(mainCharacter);
 
@@ -47,10 +65,12 @@ $(".characterArea").one("click", ".character", function () {
             userHealth = $('.characterArea>.character>.characterPower').data("health");//store userhealth rating
         }
     }
+
 });
 
-var inBattle;
+var inBattle;//click event on or off
 var userLost;//enable if user won
+
 $(".enemiesAvailable").on("click", ".character", function () {
     if (inBattle) {//turn off click event until enemy defeated--inBattle is set to true below to do this
         return;
@@ -85,7 +105,7 @@ function fighting(el) {//add attack and defence values to characters
 var currentAttackValue = 0;
 $('.fightSection').on("click", ".givePower", function () {//when you click attack button
     console.log(attack);
-    if(userLost){
+    if (userLost) {
         return;
     }
 
@@ -108,9 +128,9 @@ $('.fightSection').on("click", ".givePower", function () {//when you click attac
         $('.givePower').hide();
         inBattle = false;
     }
-    else if(userHealth<=0){
+    else if (userHealth <= 0) {
         alert("you have lost!");
-        userLost=true;
+        userLost = true;
         var resetButton = $("<button>").attr('type', 'button').addClass("btn btn-danger resetPower").text("Reset Game");
         $(".mainGame").append(resetButton);
     }
@@ -118,11 +138,6 @@ $('.fightSection').on("click", ".givePower", function () {//when you click attac
 });
 
 
-$('.mainGame').on("click",".resetPower",function(){
-        console.log("reset hit");
-        $('.playArea').empty().append($playArea);
- 
-})
 
 
 
