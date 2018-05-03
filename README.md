@@ -1,5 +1,5 @@
 # Welcome to my Star Wars Game!
-![Game Screenshot](unit-4-game/assets/images/forReadme.png)
+![Game Screenshot](/master/assets/images/forReadme.png)
 
 
 ### Here are the features of the game
