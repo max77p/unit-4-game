@@ -27,6 +27,9 @@ var userHealth;
 var enemyHealth;
 
 
+var $YourCharacterTitle=$('.selectCharacter').clone();
+var $playArea=$('.playArea').clone();
+
 $(".characterArea").one("click", ".character", function () {
 
     mainCharacter = $(this).data("name"); console.log(mainCharacter);
@@ -44,12 +47,10 @@ $(".characterArea").one("click", ".character", function () {
             userHealth = $('.characterArea>.character>.characterPower').data("health");//store userhealth rating
         }
     }
-
-
 });
 
 var inBattle;
-var userWon;//enable if user won
+var userLost;//enable if user won
 $(".enemiesAvailable").on("click", ".character", function () {
     if (inBattle) {//turn off click event until enemy defeated--inBattle is set to true below to do this
         return;
@@ -84,19 +85,16 @@ function fighting(el) {//add attack and defence values to characters
 var currentAttackValue = 0;
 $('.fightSection').on("click", ".givePower", function () {//when you click attack button
     console.log(attack);
-    if (userWon) {
+    if(userLost){
         return;
     }
 
     //set user attack value
-
     var counterAttackPower = defence;//set enemy defence value
     console.log(currentAttackValue);
     currentAttackValue += attack;//increment user attack by base value on every attack
 
     enemyHealth = enemyHealth - currentAttackValue;//bring down enemy health by user attack value
-
-    
 
     userHealth = userHealth - counterAttackPower;//bring down user health by enemy defence value
 
@@ -110,8 +108,23 @@ $('.fightSection').on("click", ".givePower", function () {//when you click attac
         $('.givePower').hide();
         inBattle = false;
     }
+    else if(userHealth<=0){
+        alert("you have lost!");
+        userLost=true;
+        var resetButton = $("<button>").attr('type', 'button').addClass("btn btn-danger resetPower").text("Reset Game");
+        $(".mainGame").append(resetButton);
+    }
 
 });
+
+
+$('.mainGame').on("click",".resetPower",function(){
+        console.log("reset hit");
+        $('.playArea').empty().append($playArea);
+ 
+})
+
+
 
 
 
@@ -184,7 +197,7 @@ if (defeated) {
 
 //TODO-if you lose, restart game
 
-//TODO-if you win, remove defender and ask user to select new defender
+//TODO-if you win, remove defender and ask user to select new defender 
 
 
 
